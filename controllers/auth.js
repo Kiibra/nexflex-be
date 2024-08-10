@@ -12,8 +12,19 @@ async function signup(req, res) {
 
     const user = await User.findOne({ email: req.body.email })
     if (user) throw new Error('Account already exists')
-
+    
+    // Create a new profile with the provided data
     const newProfile = await Profile.create(req.body)
+    
+    // Randomly select a profile picture
+    const PROFILE_PICS = ["/avatar1.png", "/avatar2.png", "/avatar3.png", "/avatar4.png", "/avatar5.png",]
+    const randomImage = PROFILE_PICS[Math.floor(Math.random() * PROFILE_PICS.length)]
+    
+    // Update the profile with the random image
+    newProfile.profilePic = randomImage
+    await newProfile.save()
+    
+    // Create a new user and associate it with the newly created profile
     req.body.profile = newProfile._id
     const newUser = await User.create(req.body)
 
