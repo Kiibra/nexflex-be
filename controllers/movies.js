@@ -46,7 +46,28 @@ async function getMovieTrailers(req, res) {
   }
 }
 
+async function getMovieDetails(req, res) {
+  try {
+    const idx = req.params.id
+
+    const response = await fetch(`${BASE_URL}/movie/${idx}?api_key=${API_KEY}&language=en-US`)
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`)
+    }
+
+    const movieDetails = await response.json()
+
+    res.json(movieDetails)
+  } catch (err) {
+    console.error('Error getting movie details:', err)
+    res.status(500).json({ error: 'Internal Server Error', details: err.message })
+  }
+}
+
+
 export {
   getTrendingMovie,
-  getMovieTrailers
+  getMovieTrailers,
+  getMovieDetails
 }

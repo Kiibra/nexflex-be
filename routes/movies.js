@@ -11,5 +11,6 @@ const router = Router()
 router.use(decodeUserFromToken)
 router.get('/trending', moviesCtrl.getTrendingMovie)
 router.get('/:id/trailers', moviesCtrl.getMovieTrailers)
+router.get('/:id/details', moviesCtrl.getMovieDetails)
 
 export { router }
