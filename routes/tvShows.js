@@ -8,6 +8,8 @@ const router = Router()
 
 
 /*---------- Protected Routes ----------*/
+router.use(decodeUserFromToken)
+router.get('/trending', tvShowsCtrl.getTrendingTv)
 
 
 export { router }
