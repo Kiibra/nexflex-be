@@ -80,9 +80,30 @@ async function getSimilarTvs(req, res) {
     res.status(500).json({ error: 'Internal Server Error', similars: err.message })
   }
 }
+
+async function getTvsByCategory(req, res) {
+  try {
+    const category = req.params.category
+
+    const response = await fetch(`${BASE_URL}/tv/${category}?api_key=${API_KEY}&language=en-US&page=1`)
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`)
+    }
+
+    const tvsCategory = await response.json()
+
+    res.json(tvsCategory)
+  } catch (err) {
+    console.error('Error getting tvShows by category:', err)
+    res.status(500).json({ error: 'Internal Server Error', category: err.message })
+  }
+}
+
 export {
   getTrendingTv, 
   getTvTrailers,
   getTvDetails,
-  getSimilarTvs
+  getSimilarTvs,
+  getTvsByCategory,
 }

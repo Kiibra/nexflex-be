@@ -13,5 +13,6 @@ router.get('/trending', tvShowsCtrl.getTrendingTv)
 router.get('/:id/trailers', tvShowsCtrl.getTvTrailers)
 router.get('/:id/details', tvShowsCtrl.getTvDetails)
 router.get('/:id/similar', tvShowsCtrl.getSimilarTvs)
+router.get('/:category', tvShowsCtrl.getTvsByCategory)
 
 export { router }
