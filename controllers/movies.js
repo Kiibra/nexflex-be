@@ -83,9 +83,29 @@ async function getSimilarMovies(req, res) {
   }
 }
 
+async function getMoviesByCategory(req, res) {
+  try {
+    const category = req.params.category
+
+    const response = await fetch(`${BASE_URL}/movie/${category}?api_key=${API_KEY}&language=en-US&page=1`)
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`)
+    }
+
+    const moviesCategory = await response.json()
+
+    res.json(moviesCategory)
+  } catch (err) {
+    console.error('Error getting movies by category:', err)
+    res.status(500).json({ error: 'Internal Server Error', category: err.message })
+  }
+}
+
 export {
   getTrendingMovie,
   getMovieTrailers,
   getMovieDetails,
   getSimilarMovies,
+  getMoviesByCategory,
 }
