@@ -12,5 +12,6 @@ router.use(decodeUserFromToken)
 router.get('/multi/:query', checkAuth, searchCtrl.searchMulti)
 
 router.get('/history', checkAuth, searchCtrl.getSearchHistory)
+// router.delete('/history/:id', checkAuth, searchCtrl.removeFromSearchHistory)
 
 export { router }
