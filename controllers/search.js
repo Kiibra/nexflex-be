@@ -19,6 +19,7 @@ async function searchMulti(req, res) {
     }
     // push the searched item/person to searchHistory with the id, image, title, searchType, and date
     await User.findByIdAndUpdate(req.user.id, {
+      // push to add something 
       $push: {
         searchHistory: {
           id:searchMultiData.results[0].id,
@@ -48,9 +49,27 @@ async function getSearchHistory (req, res) {
 }
 
 async function removeFromSearchHistory(req, res) {
-  
+  let id = req.params.id
+  // since this req.params.id will provide a result typeof: string - need to change it to number
+  id = parseInt(id)
+
+  try {
+    await User.findByIdAndUpdate(req.user._id, {
+      // pull to remove somthing 
+      $pull: {
+        searchHistory: {id: id }
+      }
+    })
+    res.status(200).json({success: true, message: "Item Removed From Search History"})
+  } catch (error) {
+    console.log("Error in removeFromSearchHistory controller:", err.message)
+    res.status(500).json({ success: false, message: 'Internal Server Error' })
+  }
 }
+
+
 export {
   searchMulti,
   getSearchHistory,
+  removeFromSearchHistory,
 }
