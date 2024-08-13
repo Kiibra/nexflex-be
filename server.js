@@ -13,6 +13,7 @@ import { router as profilesRouter } from './routes/profiles.js'
 import { router as authRouter } from './routes/auth.js'
 import { router as moviesRouter } from './routes/movies.js'
 import { router as tvShowsRouter } from './routes/tvShows.js'
+import { router as searchRouter } from './routes/search.js'
 
 // create the express app
 const app = express()
@@ -28,6 +29,7 @@ app.use('/api/profiles', profilesRouter)
 app.use('/api/auth', authRouter)
 app.use('/api', moviesRouter)
 app.use('/api/tvShows', tvShowsRouter)
+app.use('/api/search', searchRouter)
 
 // handle 404 errors
 app.use(function (req, res, next) {
