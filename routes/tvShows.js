@@ -9,10 +9,10 @@ const router = Router()
 
 /*---------- Protected Routes ----------*/
 router.use(decodeUserFromToken)
-router.get('/trending', tvShowsCtrl.getTrendingTv)
-router.get('/:id/trailers', tvShowsCtrl.getTvTrailers)
-router.get('/:id/details', tvShowsCtrl.getTvDetails)
-router.get('/:id/similar', tvShowsCtrl.getSimilarTvs)
-router.get('/:category', tvShowsCtrl.getTvsByCategory)
+router.get('/trending', checkAuth, tvShowsCtrl.getTrendingTv)
+router.get('/:id/trailers',checkAuth, tvShowsCtrl.getTvTrailers)
+router.get('/:id/details', checkAuth, tvShowsCtrl.getTvDetails)
+router.get('/:id/similar', checkAuth, tvShowsCtrl.getSimilarTvs)
+router.get('/:category', checkAuth, tvShowsCtrl.getTvsByCategory)
 
 export { router }

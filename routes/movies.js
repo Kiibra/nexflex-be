@@ -9,10 +9,10 @@ const router = Router()
 
 /*---------- Protected Routes ----------*/
 router.use(decodeUserFromToken)
-router.get('/trending', moviesCtrl.getTrendingMovie)
-router.get('/:id/trailers', moviesCtrl.getMovieTrailers)
-router.get('/:id/details', moviesCtrl.getMovieDetails)
-router.get('/:id/similar', moviesCtrl.getSimilarMovies)
-router.get('/:category', moviesCtrl.getMoviesByCategory)
+router.get('/trending', checkAuth, moviesCtrl.getTrendingMovie)
+router.get('/:id/trailers', checkAuth, moviesCtrl.getMovieTrailers)
+router.get('/:id/details', checkAuth, moviesCtrl.getMovieDetails)
+router.get('/:id/similar', checkAuth, moviesCtrl.getSimilarMovies)
+router.get('/:category', checkAuth, moviesCtrl.getMoviesByCategory)
 
 export { router }
