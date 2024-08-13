@@ -11,4 +11,6 @@ const router = Router()
 router.use(decodeUserFromToken)
 router.get('/multi/:query', checkAuth, searchCtrl.searchMulti)
 
+router.get('/history', checkAuth, searchCtrl.getSearchHistory)
+
 export { router }

@@ -39,6 +39,15 @@ async function searchMulti(req, res) {
 }
 
 
+async function getSearchHistory (req, res) {
+  try {
+    res.status(200).json({success: true, content: req.user.searchHistory})
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error', message: err.message })
+  }
+}
+
 export {
   searchMulti,
+  getSearchHistory,
 }
