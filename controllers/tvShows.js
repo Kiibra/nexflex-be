@@ -25,7 +25,26 @@ async function getTrendingTv(req, res) {
   }
 }
 
+async function getTvTrailers(req, res) {
+  try {
+    const idx = req.params.id
+    
+    const response = await fetch(`${BASE_URL}/tv/${idx}/videos?api_key=${API_KEY}&language=en-US`)
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`)
+    }
+    
+    const trailers = await response.json()
+  
+    res.json(trailers)
+  } catch (err) {
+    console.error('Error getting tvShow trailers:', err)
+    res.status(500).json({ error: 'Internal Server Error', details: err.message })
+  }
+}
 
 export {
   getTrendingTv, 
+  getTvTrailers,
 }

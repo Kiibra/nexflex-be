@@ -10,6 +10,7 @@ const router = Router()
 /*---------- Protected Routes ----------*/
 router.use(decodeUserFromToken)
 router.get('/trending', tvShowsCtrl.getTrendingTv)
+router.get('/:id/trailers', tvShowsCtrl.getTvTrailers)
 
 
 export { router }
