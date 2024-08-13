@@ -12,5 +12,6 @@ router.use(decodeUserFromToken)
 router.get('/trending', moviesCtrl.getTrendingMovie)
 router.get('/:id/trailers', moviesCtrl.getMovieTrailers)
 router.get('/:id/details', moviesCtrl.getMovieDetails)
+router.get('/:id/similar', moviesCtrl.getSimilarMovies)
 
 export { router }

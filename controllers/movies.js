@@ -65,9 +65,27 @@ async function getMovieDetails(req, res) {
   }
 }
 
+async function getSimilarMovies(req, res) {
+  try {
+    const idx = req.params.id
+    const response = await fetch(`${BASE_URL}/movie/${idx}/similar?api_key=${API_KEY}&language=en-US&page=1`)
+  
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`)
+    }
+
+    const similarMovies = await response.json()
+
+    res.json(similarMovies)
+  } catch (err) {
+    console.error('Error getting similar movies :', err)
+    res.status(500).json({ error: 'Internal Server Error', similars: err.message })
+  }
+}
 
 export {
   getTrendingMovie,
   getMovieTrailers,
-  getMovieDetails
+  getMovieDetails,
+  getSimilarMovies,
 }
