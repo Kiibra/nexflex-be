@@ -12,6 +12,6 @@ router.use(decodeUserFromToken)
 router.get('/trending', tvShowsCtrl.getTrendingTv)
 router.get('/:id/trailers', tvShowsCtrl.getTvTrailers)
 router.get('/:id/details', tvShowsCtrl.getTvDetails)
-
+router.get('/:id/similar', tvShowsCtrl.getSimilarTvs)
 
 export { router }

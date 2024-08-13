@@ -63,8 +63,26 @@ async function getTvDetails(req, res) {
   }
 }
 
+async function getSimilarTvs(req, res) {
+  try {
+    const idx = req.params.id
+    const response = await fetch(`${BASE_URL}/tv/${idx}/similar?api_key=${API_KEY}&language=en-US&page=1`)
+  
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`)
+    }
+
+    const similarTvs = await response.json()
+
+    res.json(similarTvs)
+  } catch (err) {
+    console.error('Error getting similar TvShows :', err)
+    res.status(500).json({ error: 'Internal Server Error', similars: err.message })
+  }
+}
 export {
   getTrendingTv, 
   getTvTrailers,
-  getTvDetails
+  getTvDetails,
+  getSimilarTvs
 }

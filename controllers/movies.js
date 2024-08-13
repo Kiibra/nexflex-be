@@ -25,7 +25,6 @@ async function getTrendingMovie(req, res) {
   }
 }
 
-
 async function getMovieTrailers(req, res) {
   try {
     const idx = req.params.id
